@@ -1,0 +1,493 @@
+/* ==========================================================================
+   LA FAMA CARNES - ESTILOS INSTITUCIONALES Y SISTEMA DE DISEÑO
+   Basado en DESIGN.md y referencias aprobadas de Google Stitch
+   ========================================================================== */
+
+:root {
+  /* Paleta Institucional Primaria */
+  --color-primary: #180006;
+  --color-primary-container: #3A111D; /* Vino Tinto Sobrio */
+  --color-on-primary: #FFFFFF;
+  --color-on-primary-container: #B37683;
+
+  /* Paleta Secundaria / Acento */
+  --color-secondary: #8B263E; /* Tinto Vivo / Muted Rose */
+  --color-secondary-container: #FD7E94;
+  --color-on-secondary: #FFFFFF;
+
+  /* Paleta Terciaria / Dorado Artesanal */
+  --color-tertiary: #C59B27; /* Dorado / Ámbar Artesanal */
+  --color-tertiary-fixed: #FFDF98;
+  --color-tertiary-fixed-dim: #EEC14B;
+
+  /* Superficies y Fondos Cálidos */
+  --color-surface: #FFF8F5; /* Canvas cálido */
+  --color-surface-dim: #E5D8CE;
+  --color-surface-container: #F9EBE2;
+  --color-surface-container-low: #FFF1E8;
+  --color-surface-container-high: #F3E6DC;
+  --color-surface-container-highest: #EDE0D7;
+  --color-surface-container-lowest: #FFFFFF;
+  
+  /* Textos y Bordes */
+  --color-on-surface: #211A15; /* Carbón Cálido */
+  --color-on-surface-variant: #514346;
+  --color-outline: #837376;
+  --color-outline-variant: #D8C8B9; /* Arena */
+
+  /* Tipografías */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Base */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  margin: 0;
+  padding: 0;
+}
+
+/* Tipografía de Encabezados */
+h1, h2, h3, .font-serif, .font-headline {
+  font-family: var(--font-serif);
+}
+
+/* Microinteracciones y Elevaciones */
+.card-elevation {
+  background-color: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-surface-container);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-elevation:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -6px rgba(58, 17, 29, 0.1);
+  border-color: var(--color-outline-variant);
+}
+
+/* Botón institucional primario */
+.btn-primary {
+  background-color: var(--color-primary-container);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-secondary);
+  box-shadow: 0 4px 14px rgba(58, 17, 29, 0.2);
+}
+
+/* Botón WhatsApp */
+.btn-whatsapp {
+  background-color: #25D366;
+  color: #FFFFFF;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1EBE5D;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+}
+
+/* Insignias / Pills */
+.badge-category {
+  background-color: var(--color-primary-container);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.25rem;
+}
+
+.badge-gold {
+  background-color: var(--color-tertiary-fixed);
+  color: #251A00;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+/* Píldoras de filtro de categoría */
+.filter-pill {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.filter-pill.active {
+  background-color: var(--color-primary-container) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(58, 17, 29, 0.15);
+}
+
+.filter-pill:not(.active):hover {
+  background-color: var(--color-surface-container-high);
+  border-color: var(--color-outline-variant);
+}
+
+/* Transición suave para catálogo */
+.product-card {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Scrollbar sutil y elegante */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface-container);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+}
+
+/* Menú móvil desplegable */
+#mobileMenu {
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+#mobileMenu.hidden {
+  display: none;
+}
+
+/* ==========================================================================
+   PANEL Y BOTÓN DE LISTA DE PEDIDO (SIN COMERCIO ELECTRÓNICO)
+   ========================================================================== */
+
+/* Botón flotante de acceso a la lista de pedido */
+.floating-order-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 45;
+  background-color: var(--color-primary-container);
+  color: #FFFFFF;
+  padding: 0.85rem 1.4rem;
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px -4px rgba(58, 17, 29, 0.35), 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.floating-order-btn:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 30px -4px rgba(58, 17, 29, 0.45);
+}
+
+.floating-order-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.floating-order-badge {
+  background-color: var(--color-tertiary-fixed);
+  color: #251A00;
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.35rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Animación de pulso al añadir producto */
+@keyframes pulseBadge {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+.pulse-badge {
+  animation: pulseBadge 0.35s ease-out;
+}
+
+/* Overlay oscurecido de fondo para el Drawer */
+.order-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(33, 26, 21, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.order-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Drawer / Panel lateral deslizante del pedido */
+.order-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 460px;
+  background-color: var(--color-surface-container-lowest);
+  z-index: 55;
+  box-shadow: -10px 0 35px rgba(58, 17, 29, 0.18);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border-left: 1px solid var(--color-outline-variant);
+}
+
+.order-drawer.open {
+  transform: translateX(0);
+}
+
+/* Encabezado del panel */
+.order-drawer-header {
+  padding: 1.25rem 1.5rem;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-surface-container);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Cuerpo con scroll */
+.order-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem 1.5rem;
+}
+
+/* Pie del panel con botón de WhatsApp */
+.order-drawer-footer {
+  padding: 1.25rem 1.5rem;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-surface-container);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Tarjeta individual de corte en la lista de pedido */
+.order-item-card {
+  background-color: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-surface-container);
+  border-radius: 0.85rem;
+  padding: 1rem;
+  margin-bottom: 0.85rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-item-card:hover {
+  border-color: var(--color-outline-variant);
+  box-shadow: 0 4px 14px rgba(58, 17, 29, 0.04);
+}
+
+/* Input libre de cantidad / presentación */
+.order-item-input {
+  width: 100%;
+  padding: 0.55rem 0.8rem;
+  background-color: var(--color-surface-container-low);
+  border: 1px solid var(--color-surface-container);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-on-surface);
+  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+}
+
+.order-item-input:focus {
+  outline: none;
+  background-color: #FFFFFF;
+  border-color: var(--color-primary-container);
+  box-shadow: 0 0 0 2px rgba(58, 17, 29, 0.12);
+}
+
+/* Píldoras rápidas de cantidad sugerida */
+.quick-qty-btn {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.35rem;
+  background-color: var(--color-surface-container);
+  color: var(--color-on-surface-variant);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.quick-qty-btn:hover {
+  background-color: var(--color-primary-container);
+  color: #FFFFFF;
+}
+
+/* Toast de confirmación flotante */
+.order-toast {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 1.5rem;
+  background-color: var(--color-primary-container);
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  font-size: 0.875rem;
+  z-index: 48;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.order-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* En móvil, acomodar el toast y el botón flotante */
+@media (max-width: 640px) {
+  .floating-order-btn {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.75rem 1.15rem;
+    font-size: 0.875rem;
+  }
+  .order-toast {
+    left: 1rem;
+    right: 1rem;
+    bottom: 5rem;
+    justify-content: space-between;
+  }
+}
+
+/* ==========================================================================
+   ESTILOS DE LA SECCIÓN COMBOS Y KITS
+   ========================================================================== */
+
+.combo-card {
+  background-color: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-surface-container);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(58, 17, 29, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.combo-card:hover {
+  border-color: var(--color-outline-variant);
+  box-shadow: 0 10px 30px rgba(58, 17, 29, 0.1);
+}
+
+.combo-pres-pill {
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--color-outline-variant);
+  background-color: var(--color-surface-container-low);
+  color: var(--color-on-surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.15rem;
+}
+
+.combo-pres-pill:hover {
+  background-color: var(--color-surface-container-high);
+  border-color: var(--color-secondary);
+}
+
+.combo-pres-pill.active {
+  background-color: var(--color-primary-container) !important;
+  color: #FFFFFF !important;
+  border-color: var(--color-primary-container) !important;
+  box-shadow: 0 4px 12px rgba(58, 17, 29, 0.2);
+}
+
+.combo-pres-pill.active .combo-pill-sub {
+  color: var(--color-tertiary-fixed) !important;
+}
+
+.combo-provisional-badge {
+  background-color: #FFF3CD;
+  color: #856404;
+  border: 1px solid #FFEEBA;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Selector numérico de cantidad */
+.qty-stepper-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-surface-container);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-outline-variant);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.qty-stepper-btn:hover {
+  background-color: var(--color-primary-container);
+  color: #FFFFFF;
+  border-color: var(--color-primary-container);
+}
+
+.qty-stepper-btn:active {
+  transform: scale(0.95);
+}
+
+/* Tarjeta de combo dentro del Drawer (producto cerrado) */
+.order-item-combo {
+  border-left: 3px solid var(--color-tertiary);
+  background-color: #FFFCF9;
+}
+
