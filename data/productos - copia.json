@@ -1,0 +1,234 @@
+{
+  "config": {
+    "excluirEjemplos": false,
+    "whatsappNumero": "573222468276",
+    "whatsappMensajeBase": "Hola, estoy interesado en consultar disponibilidad y presentación de [PRODUCTO]."
+  },
+  "categorias": [
+    { "id": "res", "nombre": "Res", "icono": "kebab_dining", "descripcion": "Cortes nobles y tradicionales de res seleccionada." },
+    { "id": "cerdo", "nombre": "Cerdo", "icono": "dinner_dining", "descripcion": "Cortes frescos y porcionados de cerdo especial." },
+    { "id": "pollo", "nombre": "Pollo", "icono": "egg_alt", "descripcion": "Pollo campesino fresco y despresado." },
+    { "id": "pescados", "nombre": "Pescados", "icono": "set_meal", "descripcion": "Filetes y piezas seleccionadas de pescado." },
+    { "id": "mariscos", "nombre": "Mariscos", "icono": "water_drop", "descripcion": "Variedad de mariscos para preparaciones especiales." },
+    { "id": "elaborados", "nombre": "Elaborados y preparados", "icono": "outdoor_grill", "descripcion": "Hamburguesas, chorizos y especialidades de la casa." }
+  ],
+  "productos": [
+    {
+      "id": "demo-res-01",
+      "nombre": "Bife de Chorizo",
+      "categoria": "res",
+      "categoriaLabel": "Res",
+      "presentacion": "Por confirmar",
+      "descripcion": "Corte para asar o plancha con veta perimetral. Consultar porción o pieza entera.",
+      "imagen": "assets/images/cortes/corte-bife-chorizo.jpg",
+      "destacado": true,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-res-02",
+      "nombre": "Punta de Anca",
+      "categoria": "res",
+      "categoriaLabel": "Res",
+      "presentacion": "Por confirmar",
+      "descripcion": "Corte tradicional para asado o preparación al gusto. Consultar corte deseado.",
+      "imagen": "assets/images/cortes/corte-punta-anca.jpg",
+      "destacado": true,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-res-03",
+      "nombre": "Solomito / Lomo Fino",
+      "categoria": "res",
+      "categoriaLabel": "Res",
+      "presentacion": "Por confirmar",
+      "descripcion": "Corte de gran terneza. Porción o medallones según solicitud.",
+      "imagen": null,
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-cerdo-01",
+      "nombre": "Costilla de Cerdo Especial",
+      "categoria": "cerdo",
+      "categoriaLabel": "Cerdo",
+      "presentacion": "Por confirmar",
+      "descripcion": "Costillar carnoso para asar, hornear o dorar.",
+      "imagen": "assets/images/cortes/corte-costilla-cerdo.jpg",
+      "destacado": true,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-cerdo-02",
+      "nombre": "Bondiola de Cerdo",
+      "categoria": "cerdo",
+      "categoriaLabel": "Cerdo",
+      "presentacion": "Por confirmar",
+      "descripcion": "Pieza jugosa con marmoleo natural para asados o cocciones lentas.",
+      "imagen": "assets/images/cortes/corte-bondiola.jpg",
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-cerdo-03",
+      "nombre": "Lomo de Cerdo",
+      "categoria": "cerdo",
+      "categoriaLabel": "Cerdo",
+      "presentacion": "Por confirmar",
+      "descripcion": "Corte magro y limpio para preparaciones cotidianas o asados.",
+      "imagen": null,
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-pollo-01",
+      "nombre": "Pechuga de Pollo Campesino",
+      "categoria": "pollo",
+      "categoriaLabel": "Pollo",
+      "presentacion": "Por confirmar",
+      "descripcion": "Pechuga fresca, entera o fileteada a petición del cliente.",
+      "imagen": "assets/images/cortes/corte-pollo-campesino.jpg",
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-pollo-02",
+      "nombre": "Pernil de Pollo Campesino",
+      "categoria": "pollo",
+      "categoriaLabel": "Pollo",
+      "presentacion": "Por confirmar",
+      "descripcion": "Perniles frescos seleccionados para asar o guisar.",
+      "imagen": null,
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-pollo-03",
+      "nombre": "Pollo Entero Despresado",
+      "categoria": "pollo",
+      "categoriaLabel": "Pollo",
+      "presentacion": "Por confirmar",
+      "descripcion": "Pollo campesino fresco, porcionado y preparado para su cocina.",
+      "imagen": null,
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-pescados-01",
+      "nombre": "Filete de Salmón",
+      "categoria": "pescados",
+      "categoriaLabel": "Pescados",
+      "presentacion": "Por confirmar",
+      "descripcion": "Filete fresco seleccionado para plancha u horno.",
+      "imagen": "assets/images/cortes/corte-salmon.jpg",
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-pescados-02",
+      "nombre": "Filete Blanco de Temporada",
+      "categoria": "pescados",
+      "categoriaLabel": "Pescados",
+      "presentacion": "Por confirmar",
+      "descripcion": "Filete blanco limpio y sin espinas, consultar variedad disponible.",
+      "imagen": null,
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-pescados-03",
+      "nombre": "Trucha Fresca",
+      "categoria": "pescados",
+      "categoriaLabel": "Pescados",
+      "presentacion": "Por confirmar",
+      "descripcion": "Trucha en corte mariposa o entera limpia.",
+      "imagen": null,
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-mariscos-01",
+      "nombre": "Camarón Seleccionado",
+      "categoria": "mariscos",
+      "categoriaLabel": "Mariscos",
+      "presentacion": "Por confirmar",
+      "descripcion": "Camarones limpios para arroces, pastas o cazuelas.",
+      "imagen": "assets/images/categorias/cat-mariscos.jpg",
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-mariscos-02",
+      "nombre": "Anillos de Calamar",
+      "categoria": "mariscos",
+      "categoriaLabel": "Mariscos",
+      "presentacion": "Por confirmar",
+      "descripcion": "Anillos tiernos para saltear, freír o incluir en cazuelas.",
+      "imagen": null,
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-mariscos-03",
+      "nombre": "Mixtura de Mariscos",
+      "categoria": "mariscos",
+      "categoriaLabel": "Mariscos",
+      "presentacion": "Por confirmar",
+      "descripcion": "Selección combinada de mariscos para cazuela o paella.",
+      "imagen": null,
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-elaborados-01",
+      "nombre": "Hamburguesas Artesanales",
+      "categoria": "elaborados",
+      "categoriaLabel": "Elaborados y preparados",
+      "presentacion": "Por confirmar",
+      "descripcion": "Elaboradas con carne seleccionada, listas para asar o dorar en sartén.",
+      "imagen": "assets/images/cortes/corte-hamburguesa.jpg",
+      "destacado": true,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-elaborados-02",
+      "nombre": "Chorizo Tradicional",
+      "categoria": "elaborados",
+      "categoriaLabel": "Elaborados y preparados",
+      "presentacion": "Por confirmar",
+      "descripcion": "Receta artesanal tradicional con carne de cerdo seleccionada.",
+      "imagen": "assets/images/cortes/corte-chorizo.jpg",
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    },
+    {
+      "id": "demo-elaborados-03",
+      "nombre": "Albóndigas Caseras",
+      "categoria": "elaborados",
+      "categoriaLabel": "Elaborados y preparados",
+      "presentacion": "Por confirmar",
+      "descripcion": "Preparación casera condimentada con hierbas naturales.",
+      "imagen": null,
+      "destacado": false,
+      "activo": true,
+      "esEjemplo": true
+    }
+  ]
+}
+
