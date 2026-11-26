@@ -129,6 +129,7 @@
         id: prod.id,
         nombre: prod.nombre,
         categoria: prod.categoriaLabel || prod.categoria,
+        presentacion: prod.presentacion || 'Por confirmar',
         indicacion: indicacionInicial
       });
 
@@ -271,10 +272,17 @@
         }
         texto += `\n`;
       } else {
+        const presentacion = item.presentacion ||
+          productos.find(p => p.id === item.id)?.presentacion ||
+          'Por confirmar';
+
         const detalle = item.indicacion && item.indicacion.trim() !== ''
           ? item.indicacion.trim()
-          : 'Porción o corte a consultar';
-        texto += `${idx + 1}. *${item.nombre}* (${item.categoria})\n   → Detalle/Cantidad: ${detalle}\n\n`;
+          : 'Cantidad por confirmar';
+
+        texto += `${idx + 1}. *${item.nombre}* (${item.categoria})\n`;
+        texto += `   → Presentación: ${presentacion}\n`;
+        texto += `   → Cantidad: ${detalle}\n\n`;
       }
     });
 
@@ -307,24 +315,25 @@
   /**
    * Renderiza el contenido interno del panel lateral
    */
+
   function renderizarDrawer() {
     if (!orderDrawerBody) return;
 
     if (listaPedido.length === 0) {
       orderDrawerBody.innerHTML = `
-        <div class="py-14 px-4 text-center flex flex-col items-center justify-center text-on-surface-variant">
-          <div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-3">
-            <span class="material-symbols-outlined text-3xl">receipt_long</span>
-          </div>
-          <h3 class="font-headline-md text-lg font-bold text-primary mb-1">Tu lista de pedido está vacía</h3>
-          <p class="font-body-sm text-xs max-w-xs mb-5 leading-relaxed">
-            Explora nuestro catálogo y pulsa «Agregar al pedido» en los cortes que deseas solicitar para consolidar tu solicitud.
-          </p>
-          <button type="button" id="drawerExploreBtn" class="px-5 py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-title-sm text-xs font-semibold transition-colors">
-            Explorar catálogo
-          </button>
+      <div class="py-14 px-4 text-center flex flex-col items-center justify-center text-on-surface-variant">
+        <div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-3">
+          <span class="material-symbols-outlined text-3xl">receipt_long</span>
         </div>
-      `;
+        <h3 class="font-headline-md text-lg font-bold text-primary mb-1">Tu lista de pedido está vacía</h3>
+        <p class="font-body-sm text-xs max-w-xs mb-5 leading-relaxed">
+          Explora nuestro catálogo y pulsa «Agregar al pedido» en los cortes que deseas solicitar para consolidar tu solicitud.
+        </p>
+        <button type="button" id="drawerExploreBtn" class="px-5 py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-title-sm text-xs font-semibold transition-colors">
+          Explorar catálogo
+        </button>
+      </div>
+    `;
 
       const exploreBtn = document.getElementById('drawerExploreBtn');
       if (exploreBtn) exploreBtn.addEventListener('click', cerrarDrawer);
@@ -334,100 +343,110 @@
     }
 
     let html = '';
+
     listaPedido.forEach(item => {
-
       if (item.esCombo) {
-        // ── Tarjeta combo cerrado ──────────────────────────────────────────
         const cant = item.cantidad || 1;
+
         html += `
-          <div class="order-item-card order-item-combo" data-order-item-id="${item.id}">
-            <div class="flex items-start justify-between gap-3 mb-2">
-              <div class="flex-1 min-w-0">
-                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-sm text-[10px] uppercase font-bold tracking-wider mb-1">
-                  <span class="material-symbols-outlined text-xs">local_fire_department</span>
-                  Combo Cerrado
-                </span>
-                <h4 class="font-headline-md text-base font-bold text-primary truncate">${item.nombre}</h4>
-                <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">${item.personas} personas · ${item.pesoEstimado} estimados</p>
-              </div>
-              <button type="button" data-action="eliminar-item" data-prod-id="${item.id}"
-                aria-label="Eliminar ${item.nombre}"
-                class="shrink-0 text-on-surface-variant hover:text-secondary p-1 rounded-md transition-colors" title="Eliminar">
-                <span class="material-symbols-outlined text-xl">delete_outline</span>
-              </button>
-            </div>
-
-            <!-- Stepper cantidad -->
-            <div class="flex items-center gap-2 mt-2">
-              <span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant font-semibold">Cantidad:</span>
-              <button type="button" class="qty-stepper-btn" data-action="drawer-combo-menos" data-prod-id="${item.id}" aria-label="Reducir">−</button>
-              <span class="font-title-sm font-bold text-primary w-7 text-center tabular-nums" data-drawer-qty="${item.id}">${cant}</span>
-              <button type="button" class="qty-stepper-btn" data-action="drawer-combo-mas" data-prod-id="${item.id}" aria-label="Aumentar">+</button>
-              <span class="font-label-sm text-[11px] text-on-surface-variant ml-1">${cant === 1 ? 'combo' : 'combos'}</span>
-            </div>
-
-            <!-- Precio provisional -->
-            <div class="mt-2">
-              <span class="combo-provisional-badge text-[10px]">
-                <span class="material-symbols-outlined text-xs">info</span>
-                ${item.precioProvisionalTexto}
+        <div class="order-item-card order-item-combo" data-order-item-id="${item.id}">
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <div class="flex-1 min-w-0">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-secondary/15 text-secondary font-label-sm text-[10px] uppercase font-bold tracking-wider mb-1">
+                <span class="material-symbols-outlined text-xs">local_fire_department</span>
+                Combo Cerrado
               </span>
+              <h4 class="font-headline-md text-base font-bold text-primary truncate">${item.nombre}</h4>
+              <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">${item.personas} personas · ${item.pesoEstimado} estimados</p>
             </div>
-            <p class="font-body-sm text-[11px] text-on-surface-variant/70 mt-1.5 leading-relaxed">
-              Los componentes de este combo no son modificables desde el pedido.
-            </p>
-          </div>`;
+            <button type="button" data-action="eliminar-item" data-prod-id="${item.id}"
+              aria-label="Eliminar ${item.nombre}"
+              class="shrink-0 text-on-surface-variant hover:text-secondary p-1 rounded-md transition-colors" title="Eliminar">
+              <span class="material-symbols-outlined text-xl">delete_outline</span>
+            </button>
+          </div>
 
+          <div class="flex items-center gap-2 mt-2">
+            <span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant font-semibold">Cantidad:</span>
+            <button type="button" class="qty-stepper-btn" data-action="drawer-combo-menos" data-prod-id="${item.id}" aria-label="Reducir">−</button>
+            <span class="font-title-sm font-bold text-primary w-7 text-center tabular-nums" data-drawer-qty="${item.id}">${cant}</span>
+            <button type="button" class="qty-stepper-btn" data-action="drawer-combo-mas" data-prod-id="${item.id}" aria-label="Aumentar">+</button>
+            <span class="font-label-sm text-[11px] text-on-surface-variant ml-1">${cant === 1 ? 'combo' : 'combos'}</span>
+          </div>
+
+          <div class="mt-2">
+            <span class="combo-provisional-badge text-[10px]">
+              <span class="material-symbols-outlined text-xs">info</span>
+              ${item.precioProvisionalTexto}
+            </span>
+          </div>
+          <p class="font-body-sm text-[11px] text-on-surface-variant/70 mt-1.5 leading-relaxed">
+            Los componentes de este combo no son modificables desde el pedido.
+          </p>
+        </div>`;
       } else {
-        // ── Tarjeta producto individual ───────────────────────────────────
+        const presentacion = item.presentacion ||
+          productos.find(p => p.id === item.id)?.presentacion ||
+          'Por confirmar';
+
+        const modalidad = String(presentacion).toLowerCase();
+        const esPeso = modalidad.includes('peso');
+        const esPaquete = modalidad.includes('paquete');
+
+        let sugerencias = '';
+
+        if (esPeso) {
+          sugerencias = `
+          <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="500 gramos" class="quick-qty-btn">500g</button>
+          <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="1 kilo" class="quick-qty-btn">1 kg</button>
+          <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="2 kilos" class="quick-qty-btn">2 kg</button>`;
+        } else if (esPaquete) {
+          sugerencias = `
+          <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="1 paquete" class="quick-qty-btn">1 paquete</button>
+          <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="2 paquetes" class="quick-qty-btn">2 paquetes</button>
+          <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="3 paquetes" class="quick-qty-btn">3 paquetes</button>`;
+        }
+
         html += `
-          <div class="order-item-card" data-order-item-id="${item.id}">
-            <div class="flex items-start justify-between gap-3 mb-2">
-              <div>
-                <span class="inline-block px-2 py-0.5 rounded bg-primary-container/10 text-primary font-label-sm text-[10px] uppercase font-bold tracking-wider mb-1">
-                  ${item.categoria}
-                </span>
-                <h4 class="font-headline-md text-base font-bold text-primary">${item.nombre}</h4>
-              </div>
-              <button type="button"
-                      data-action="eliminar-item"
-                      data-prod-id="${item.id}"
-                      aria-label="Eliminar ${item.nombre}"
-                      class="text-on-surface-variant hover:text-secondary p-1 rounded-md transition-colors" title="Eliminar corte">
-                <span class="material-symbols-outlined text-xl">delete_outline</span>
-              </button>
+        <div class="order-item-card" data-order-item-id="${item.id}">
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <div>
+              <span class="inline-block px-2 py-0.5 rounded bg-primary-container/10 text-primary font-label-sm text-[10px] uppercase font-bold tracking-wider mb-1">
+                ${item.categoria}
+              </span>
+              <h4 class="font-headline-md text-base font-bold text-primary">${item.nombre}</h4>
+              <p class="text-xs text-on-surface-variant mt-1">
+                Presentación: <strong>${presentacion}</strong>
+              </p>
             </div>
+            <button type="button" data-action="eliminar-item" data-prod-id="${item.id}"
+              aria-label="Eliminar ${item.nombre}"
+              class="text-on-surface-variant hover:text-secondary p-1 rounded-md transition-colors" title="Eliminar corte">
+              <span class="material-symbols-outlined text-xl">delete_outline</span>
+            </button>
+          </div>
 
-            <!-- Campo libre de cantidad o presentación -->
-            <div class="mt-2">
-              <label class="block font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant mb-1 font-semibold">
-                Cantidad o presentación deseada:
-              </label>
-              <input type="text"
-                     data-action="cambiar-indicacion"
-                     data-prod-id="${item.id}"
-                     class="order-item-input"
-                     placeholder="Ej: 500g, 1 kg, 2 unidades o al gusto..."
-                     value="${escapeHtml(item.indicacion || '')}">
-            </div>
+          <div class="mt-2">
+            <label class="block font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant mb-1 font-semibold">
+              Cantidad deseada:
+            </label>
+            <input type="text" data-action="cambiar-indicacion"
+              data-prod-id="${item.id}" class="order-item-input"
+              placeholder="${esPeso ? 'Ej: 500 gramos o 1 kilo' : esPaquete ? 'Ej: 2 paquetes' : 'Indica la cantidad deseada'}"
+              value="${escapeHtml(item.indicacion || '')}">
+          </div>
 
-            <!-- Píldoras de sugerencias rápidas -->
+          ${sugerencias ? `
             <div class="flex items-center gap-1.5 mt-2 flex-wrap">
               <span class="text-[10px] text-on-surface-variant/70 font-medium">Sugerencias:</span>
-              <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="500 gramos" class="quick-qty-btn">500g</button>
-              <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="1 kilo" class="quick-qty-btn">1 kg</button>
-              <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="2 kilos" class="quick-qty-btn">2 kg</button>
-              <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="Unidades" class="quick-qty-btn">Unidades</button>
-              <button type="button" data-action="sugerir-qty" data-prod-id="${item.id}" data-val="Paquetes" class="quick-qty-btn">Paquetes</button>
-            </div>
-          </div>
-        `;
+              ${sugerencias}
+            </div>` : ''}
+        </div>`;
       }
     });
 
     orderDrawerBody.innerHTML = html;
 
-    // Escuchadores para los inputs de cantidad libre
     orderDrawerBody.querySelectorAll('input[data-action="cambiar-indicacion"]').forEach(input => {
       input.addEventListener('input', (e) => {
         const prodId = e.target.getAttribute('data-prod-id');
@@ -435,9 +454,8 @@
       });
     });
 
-    // Escuchadores para botones de sugerencia rápida
     orderDrawerBody.querySelectorAll('button[data-action="sugerir-qty"]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         const prodId = btn.getAttribute('data-prod-id');
         const valor = btn.getAttribute('data-val');
         const input = orderDrawerBody.querySelector(`input[data-action="cambiar-indicacion"][data-prod-id="${prodId}"]`);
@@ -449,15 +467,12 @@
       });
     });
 
-    // Escuchadores para eliminar corte/combo
     orderDrawerBody.querySelectorAll('button[data-action="eliminar-item"]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const prodId = btn.getAttribute('data-prod-id');
-        eliminarDelPedido(prodId);
+      btn.addEventListener('click', () => {
+        eliminarDelPedido(btn.getAttribute('data-prod-id'));
       });
     });
 
-    // Escuchadores stepper cantidad combos en el drawer (−)
     orderDrawerBody.querySelectorAll('button[data-action="drawer-combo-menos"]').forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-prod-id');
@@ -470,7 +485,6 @@
       });
     });
 
-    // Escuchadores stepper cantidad combos en el drawer (+)
     orderDrawerBody.querySelectorAll('button[data-action="drawer-combo-mas"]').forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-prod-id');
@@ -485,6 +499,7 @@
 
     actualizarEnlaceWhatsApp();
   }
+
 
   /**
    * Muestra notificación toast flotante
